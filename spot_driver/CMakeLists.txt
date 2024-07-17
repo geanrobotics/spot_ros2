@@ -48,6 +48,7 @@ add_library(spot_api
   src/api/default_time_sync_api.cpp
   src/api/default_world_object_client.cpp
   src/api/spot_image_sources.cpp
+  src/api/default_lidar_client.cpp
   src/conversions/common_conversions.cpp
   src/conversions/decompress_images.cpp
   src/conversions/geometry.cpp
@@ -72,6 +73,9 @@ add_library(spot_api
   src/robot_state/state_middleware_handle.cpp
   src/robot_state/state_publisher.cpp
   src/robot_state/state_publisher_node.cpp
+  src/velodyne_lidar/lidar_middleware_handle.cpp
+  src/velodyne_lidar/lidar_publisher.cpp
+  src/velodyne_lidar/lidar_publisher_node.cpp
 )
 
 target_include_directories(spot_api PUBLIC
@@ -109,6 +113,34 @@ rclcpp_components_register_node(
   spot_image_publisher_component
   PLUGIN "spot_ros2::images::SpotImagePublisherNode"
   EXECUTABLE spot_image_publisher_node_component)
+
+###
+# Spot lidar publisher
+###
+
+# Create executable to allow running StatePublisherNode directly as a ROS 2 node
+add_executable(lidar_publisher_node src/velodyne_lidar/lidar_publisher_node_main.cpp)
+target_link_libraries(lidar_publisher_node PUBLIC spot_api)
+target_include_directories(lidar_publisher_node
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+)
+
+# Register a composable node to allow loading StatePublisherNode in a component container
+add_library(lidar_publisher_component SHARED src/velodyne_lidar/lidar_publisher_component.cpp)
+target_include_directories(lidar_publisher_component
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+)
+target_link_libraries(lidar_publisher_component PUBLIC spot_api)
+ament_target_dependencies(lidar_publisher_component PUBLIC rclcpp_components)
+
+rclcpp_components_register_node(
+  lidar_publisher_component
+  PLUGIN "spot_ros2::LidarPublisherNode"
+  EXECUTABLE lidar_publisher_node_component)
 
 ###
 # Spot state publisher

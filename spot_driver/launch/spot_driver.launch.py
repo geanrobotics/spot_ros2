@@ -114,6 +114,14 @@ def launch_setup(context: LaunchContext, ld: LaunchDescription) -> None:
         namespace=spot_name,
     )
     ld.add_action(spot_robot_state_publisher)
+    
+    spot_lidar_publisher = launch_ros.actions.Node(
+        package="spot_driver",
+        executable="lidar_publisher_node",
+        output="screen",
+        namespace=spot_name,
+    )
+    ld.add_action(spot_lidar_publisher)
 
     spot_alert_node = launch_ros.actions.Node(
         package="spot_driver",

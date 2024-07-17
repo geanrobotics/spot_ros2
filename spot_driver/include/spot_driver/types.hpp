@@ -10,6 +10,8 @@
 #include <sensor_msgs/msg/compressed_image.hpp>
 #include <sensor_msgs/msg/image.hpp>
 #include <sensor_msgs/msg/joint_state.hpp>
+#include <sensor_msgs/msg/point_cloud2.hpp>
+
 #include <spot_msgs/msg/battery_state_array.hpp>
 #include <spot_msgs/msg/behavior_fault_state.hpp>
 #include <spot_msgs/msg/e_stop_state_array.hpp>
@@ -121,3 +123,7 @@ struct RobotStateMessages {
   std::optional<geometry_msgs::msg::Vector3Stamped> maybe_end_effector_force;
   std::optional<spot_msgs::msg::BehaviorFaultState> maybe_behavior_fault_state;
 };
+
+struct VelodyneMessages {
+  sensor_msgs::msg::PointCloud2 pointcloud;
+}
