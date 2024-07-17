@@ -33,10 +33,10 @@ LidarPublisherNode::LidarPublisherNode(std::unique_ptr<NodeInterfaceBase> node_b
 }
 
 LidarPublisherNode::LidarPublisherNode(const rclcpp::NodeOptions& node_options) {
-  const auto node = std::make_shared<rclcpp::Node>("state_publisher", node_options);
+  const auto node = std::make_shared<rclcpp::Node>("lidar_publisher", node_options);
   node_base_interface_ = std::make_unique<RclcppNodeInterface>(node->get_node_base_interface());
 
-  auto mw_handle = std::make_unique<StateMiddlewareHandle>(node);
+  auto mw_handle = std::make_unique<LidarMiddlewareHandle>(node);
   auto parameter_interface = std::make_unique<RclcppParameterInterface>(node);
   auto logger_interface = std::make_unique<RclcppLoggerInterface>(node->get_logger());
   auto tf_broadcaster_interface = std::make_unique<RclcppTfBroadcasterInterface>(node);
@@ -75,7 +75,7 @@ void LidarPublisherNode::initialize(std::unique_ptr<SpotApi> spot_api,
     throw std::runtime_error(error_msg);
   }
 
-  internal_ = std::make_unique<LidarPublisher>(spot_api_->stateClientInterface(), spot_api_->timeSyncInterface(),
+  internal_ = std::make_unique<LidarPublisher>(spot_api_->lidar_client_interface(), spot_api_->timeSyncInterface(),
                                                std::move(middleware_handle), std::move(parameter_interface),
                                                std::move(logger_interface), std::move(tf_broadcaster_interface),
                                                std::move(timer_interface));

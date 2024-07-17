@@ -9,6 +9,7 @@
 #include <spot_driver/api/state_client_interface.hpp>
 #include <spot_driver/api/time_sync_api.hpp>
 #include <spot_driver/interfaces/image_client_interface.hpp>
+#include <spot_driver/interfaces/velodyne_client_interface.hpp>
 
 #include <memory>
 #include <optional>
@@ -24,6 +25,7 @@ class MockSpotApi : public SpotApi {
   MOCK_METHOD((tl::expected<bool, std::string>), hasArm, (), (const, override));
   MOCK_METHOD(std::shared_ptr<KinematicApi>, kinematicInterface, (), (const, override));
   MOCK_METHOD(std::shared_ptr<ImageClientInterface>, image_client_interface, (), (const, override));
+  MOCK_METHOD(std::shared_ptr<LidarClientInterface>, lidar_client_interface, (), (const, override));
   MOCK_METHOD(std::shared_ptr<StateClientInterface>, stateClientInterface, (), (const, override));
   MOCK_METHOD(std::shared_ptr<TimeSyncApi>, timeSyncInterface, (), (const, override));
   MOCK_METHOD(std::shared_ptr<WorldObjectClientInterface>, worldObjectClientInterface, (), (const, override));

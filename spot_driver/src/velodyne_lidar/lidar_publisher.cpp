@@ -63,11 +63,8 @@ void LidarPublisher::timerCallback() {
 
   // will have to mould result to fit pcl
 
-  middleware_handle_->publishRobotState(robot_state);
+  //middleware_handle_->publishLidar(robot_state);
 
-  if (robot_state_messages.maybe_tf) {
-    tf_broadcaster_interface_->sendDynamicTransforms(robot_state_messages.maybe_tf->transforms);
-  }
 }
 
 }  // namespace spot_ros2

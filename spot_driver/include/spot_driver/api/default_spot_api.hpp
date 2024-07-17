@@ -30,6 +30,7 @@ class DefaultSpotApi : public SpotApi {
   [[nodiscard]] tl::expected<bool, std::string> hasArm() const override;
   [[nodiscard]] std::shared_ptr<KinematicApi> kinematicInterface() const override;
   [[nodiscard]] std::shared_ptr<ImageClientInterface> image_client_interface() const override;
+  [[nodiscard]] std::shared_ptr<LidarClientInterface> lidar_client_interface() const override;
   [[nodiscard]] std::shared_ptr<StateClientInterface> stateClientInterface() const override;
   [[nodiscard]] std::shared_ptr<TimeSyncApi> timeSyncInterface() const override;
   [[nodiscard]] std::shared_ptr<WorldObjectClientInterface> worldObjectClientInterface() const override;
@@ -39,6 +40,7 @@ class DefaultSpotApi : public SpotApi {
   std::unique_ptr<::bosdyn::client::Robot> robot_;
   std::shared_ptr<KinematicApi> kinematic_interface_;
   std::shared_ptr<ImageClientInterface> image_client_interface_;
+  std::shared_ptr<LidarClientInterface> lidar_client_interface_;
   std::shared_ptr<StateClientInterface> state_client_interface_;
   std::shared_ptr<TimeSyncApi> time_sync_api_;
   std::shared_ptr<WorldObjectClientInterface> world_object_client_interface_;

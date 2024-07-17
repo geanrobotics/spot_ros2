@@ -1,0 +1,2 @@
+Invoking command in '/home/homer/ros2_ws/src/spot_driver/build/spot_driver': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/homer/ros2_ws/src/spot_driver -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/homer/ros2_ws/src/spot_driver/install/spot_driver
+Invoked command in '/home/homer/ros2_ws/src/spot_driver/build/spot_driver' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/homer/ros2_ws/src/spot_driver -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/homer/ros2_ws/src/spot_driver/install/spot_driver

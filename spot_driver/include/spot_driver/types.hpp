@@ -126,4 +126,4 @@ struct RobotStateMessages {
 
 struct VelodyneMessages {
   sensor_msgs::msg::PointCloud2 pointcloud;
-}
+};

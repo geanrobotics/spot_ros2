@@ -4,6 +4,8 @@
 #include <bosdyn/client/world_objects/world_object_client.h>
 #include <memory>
 #include <spot_driver/api/default_image_client.hpp>
+#include <spot_driver/api/default_lidar_client.hpp>
+
 #include <spot_driver/api/default_kinematic_api.hpp>
 #include <spot_driver/api/default_spot_api.hpp>
 #include <spot_driver/api/default_state_client.hpp>
@@ -76,6 +78,14 @@ tl::expected<void, std::string> DefaultSpotApi::authenticate(const std::string& 
   image_client_interface_ =
       std::make_shared<DefaultImageClient>(image_client_result.response, time_sync_api_, robot_name_);
 
+  // Lidar 
+  const auto lidar_state_result = robot_->EnsureServiceClient<::bosdyn::client::RobotStateClient>(
+      ::bosdyn::client::RobotStateClient::GetDefaultServiceName());
+  if (!lidar_state_result.status) {
+    return tl::make_unexpected("Failed to get lidar service client.");
+  }
+  lidar_client_interface_ = std::make_shared<LidarClient>(lidar_state_result.response);
+
   const auto robot_state_result = robot_->EnsureServiceClient<::bosdyn::client::RobotStateClient>(
       ::bosdyn::client::RobotStateClient::GetDefaultServiceName());
   if (!robot_state_result.status) {
@@ -127,6 +137,10 @@ tl::expected<bool, std::string> DefaultSpotApi::hasArm() const {
 
 std::shared_ptr<ImageClientInterface> DefaultSpotApi::image_client_interface() const {
   return image_client_interface_;
+}
+
+std::shared_ptr<LidarClientInterface> DefaultSpotApi::lidar_client_interface() const {
+  return lidar_client_interface_;
 }
 
 std::shared_ptr<StateClientInterface> DefaultSpotApi::stateClientInterface() const {

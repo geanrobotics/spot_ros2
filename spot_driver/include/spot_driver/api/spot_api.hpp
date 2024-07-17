@@ -7,6 +7,8 @@
 #include <spot_driver/api/time_sync_api.hpp>
 #include <spot_driver/api/world_object_client_interface.hpp>
 #include <spot_driver/interfaces/image_client_interface.hpp>
+#include <spot_driver/interfaces/velodyne_client_interface.hpp>
+
 #include <tl_expected/expected.hpp>
 
 #include <memory>
@@ -38,6 +40,7 @@ class SpotApi {
    */
   virtual std::shared_ptr<KinematicApi> kinematicInterface() const = 0;
   virtual std::shared_ptr<ImageClientInterface> image_client_interface() const = 0;
+  virtual std::shared_ptr<LidarClientInterface> lidar_client_interface() const = 0;  
 
   /**
    * @brief Get a StateClientInterface that communicates with Spot's robot state server.

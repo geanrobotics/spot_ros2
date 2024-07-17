@@ -250,6 +250,7 @@ install(
     spot_image_publisher_component
     spot_inverse_kinematics_component
     state_publisher_component
+    lidar_publisher_component
   EXPORT ${PROJECT_NAME}Targets
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
@@ -268,6 +269,8 @@ install(
     spot_inverse_kinematics_node_component
     state_publisher_node
     state_publisher_node_component
+    lidar_publisher_node
+    lidar_publisher_node_component
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 
