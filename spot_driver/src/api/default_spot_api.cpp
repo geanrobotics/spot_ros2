@@ -79,8 +79,8 @@ tl::expected<void, std::string> DefaultSpotApi::authenticate(const std::string& 
       std::make_shared<DefaultImageClient>(image_client_result.response, time_sync_api_, robot_name_);
 
   // Lidar 
-  const auto lidar_state_result = robot_->EnsureServiceClient<::bosdyn::client::RobotStateClient>(
-      ::bosdyn::client::RobotStateClient::GetDefaultServiceName());
+  const auto lidar_state_result = robot_->EnsureServiceClient<::bosdyn::client::PointCloudClient>(
+      ::bosdyn::client::PointCloudClient::GetDefaultServiceName());
   if (!lidar_state_result.status) {
     return tl::make_unexpected("Failed to get lidar service client.");
   }
