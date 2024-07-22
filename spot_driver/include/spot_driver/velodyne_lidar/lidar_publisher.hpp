@@ -14,6 +14,7 @@
 #include <spot_driver/interfaces/tf_broadcaster_interface_base.hpp>
 #include <spot_driver/interfaces/timer_interface_base.hpp>
 #include <spot_driver/types.hpp>
+#include <sensor_msgs/msg/point_cloud2.hpp>
 
 namespace spot_ros2 {
 
@@ -29,7 +30,7 @@ class LidarPublisher {
   class MiddlewareHandle : public MiddlewareHandleBase {
    public:
     virtual ~MiddlewareHandle() = default;
-    virtual void publishLidar(const VelodyneMessages& velodyne) = 0;
+    virtual void publishLidar(const sensor_msgs::msg::PointCloud2& msg) = 0;
   };
 
   /**

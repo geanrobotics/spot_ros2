@@ -27,8 +27,8 @@ LidarMiddlewareHandle::LidarMiddlewareHandle(const std::shared_ptr<rclcpp::Node>
 LidarMiddlewareHandle::LidarMiddlewareHandle(const rclcpp::NodeOptions& node_options)
     : LidarMiddlewareHandle(std::make_shared<rclcpp::Node>(kNodeName, node_options)) {}
 
-void LidarMiddlewareHandle::publishLidar(const VelodyneMessages& velodyne) {
-  lidar_publisher_->publish(velodyne.pointcloud);
+void LidarMiddlewareHandle::publishLidar(const sensor_msgs::msg::PointCloud2& msg) {
+  lidar_publisher_->publish(msg);
 }
 
 }  // namespace spot_ros2

@@ -58,12 +58,7 @@ void LidarPublisher::timerCallback() {
     return;
   }
 
-  const auto& clock_skew = clock_skew_result.value();
-  const auto& robot_state = lidar_result.value();
-
-  // will have to mould result to fit pcl
-
-  //middleware_handle_->publishLidar(robot_state);
+  middleware_handle_->publishLidar(lidar_result.value());
 
 }
 

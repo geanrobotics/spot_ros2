@@ -39,7 +39,7 @@ class LidarMiddlewareHandle : public LidarPublisher::MiddlewareHandle {
    * @brief Publish robot state messages
    * @param robot_state_msgs Robot state messages to publish
    */
-  void publishLidar(const VelodyneMessages& velodyne) override;
+  void publishLidar(const sensor_msgs::msg::PointCloud2& msg) override;
 
  private:
   /** @brief Shared instance of an rclcpp node to create publishers */

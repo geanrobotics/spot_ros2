@@ -6,6 +6,7 @@
 #include <tl_expected/expected.hpp>
 #include <bosdyn/api/point_cloud.pb.h>
 #include <bosdyn/client/point_cloud/point_cloud_client.h>
+#include <sensor_msgs/msg/point_cloud2.hpp>
 
 #include <string>
 
@@ -31,6 +32,6 @@ class LidarClientInterface {
    * request could not be completed, or if the response does not contain a RobotState message, return an error message
    * describing the failure.
    */
-  virtual tl::expected<bosdyn::api::GetPointCloudResponse, std::string> getPointCloud() = 0;
+  virtual tl::expected<sensor_msgs::msg::PointCloud2, std::string> getPointCloud() = 0;
 };
 }  // namespace spot_ros2
